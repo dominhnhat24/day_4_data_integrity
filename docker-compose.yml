@@ -1,0 +1,44 @@
+# Khai báo các service/container sẽ chạy
+services:
+
+  # Tên service là postgres
+  postgres:
+
+    # Sử dụng image PostgreSQL version 16
+    image: postgres:16
+
+    # Đặt tên container để dễ quản lý
+    container_name: academy-postgres
+
+    # Các biến môi trường truyền vào PostgreSQL
+    environment:
+
+      # Tạo username cho database
+      POSTGRES_USER: student
+
+      # Tạo password cho database
+      POSTGRES_PASSWORD: 123456
+
+      # Tạo database mặc định khi container khởi động
+      POSTGRES_DB: ecommerce
+
+    # Port mapping
+    ports:
+
+      # Máy local port 5432
+      # ↓
+      # Container port 5432
+      - "5432:5432"
+
+    # Volume dùng để lưu dữ liệu bền vững
+    volumes:
+
+      # pgdata là tên volume
+      # /var/lib/postgresql/data là nơi PostgreSQL lưu dữ liệu trong container
+      - pgdata:/var/lib/postgresql/data
+
+# Khai báo volume tên pgdata
+volumes:
+
+  # Docker sẽ tự tạo volume này
+  pgdata:
